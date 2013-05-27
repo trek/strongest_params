@@ -1,7 +1,6 @@
-require 'active_model'
+Bundler.require(:default)
 require 'active_support/hash_with_indifferent_access'
 require 'active_support/core_ext/hash'
-require 'pry'
 require 'set'
 
 class Parameters < HashWithIndifferentAccess
@@ -20,7 +19,7 @@ class Parameters < HashWithIndifferentAccess
   
   class NestedValidator < ActiveModel::EachValidator
     def initialize(options, &block)
-      options.merge!(:with => Class.new(Parameters, &block))
+      options[:with] ||= Class.new(Parameters, &block)
       super
     end
 
@@ -45,6 +44,10 @@ class Parameters < HashWithIndifferentAccess
   end
 
   class InclusionValidator < ActiveModel::Validations::InclusionValidator # :nodoc:
+    include WhistListing
+  end
+
+  class ExclusionValidator < ActiveModel::Validations::ExclusionValidator # :nodoc:
     include WhistListing
   end 
 
