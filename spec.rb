@@ -90,6 +90,31 @@ describe "options: on" do
   end
 end
 
+describe "options: length" do
+  subject do
+    Class.new(Parameters) do
+      def self.name
+        "Anonymous"
+      end
+
+      validates :name, length: {minimum: 12}
+    end
+  end
+
+  it "adds an error when validation fails" do
+    c = subject.new(name: '< 12')
+    c.valid?
+    c.errors[:name].should == ["is too short (minimum is 12 characters)"]
+  end
+
+  it "does not add an error when validation passes" do
+    c = subject.new(name: 'more than 12 characters')
+    c.valid?
+    binding.pry
+    c.errors.should be_empty
+  end
+end
+
 describe "exclusion" do
   subject do
     Class.new(Parameters) do

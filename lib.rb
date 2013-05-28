@@ -47,6 +47,10 @@ class Parameters < HashWithIndifferentAccess
     include WhistListing
   end
 
+  class LengthValidator < ActiveModel::Validations::LengthValidator # :nodoc:
+    include WhistListing
+  end
+
   class ExclusionValidator < ActiveModel::Validations::ExclusionValidator # :nodoc:
     include WhistListing
   end 
