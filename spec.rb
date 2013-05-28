@@ -29,7 +29,7 @@ describe "nested parameters using block" do
   it_behaves_like "nested parameters"
 
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -46,11 +46,11 @@ describe "nested parameters using with option" do
   it_behaves_like "nested parameters"
 
   subject do
-    with_option = Class.new(Parameters) do
+    with_option = Class.new(StrongerParamters) do
       validates :name, allowed: true
     end
 
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -62,7 +62,7 @@ end
 
 describe "options: on" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -92,7 +92,7 @@ end
 
 describe "options: length" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -117,7 +117,7 @@ end
 
 describe "exclusion" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -141,7 +141,7 @@ end
 
 describe "inclusion" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -165,7 +165,7 @@ end
 
 describe "allowed" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end
@@ -195,7 +195,7 @@ end
 
 describe "required" do
   subject do
-    Class.new(Parameters) do
+    Class.new(StrongerParamters) do
       def self.name
         "Anonymous"
       end

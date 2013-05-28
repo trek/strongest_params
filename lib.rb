@@ -3,7 +3,7 @@ require 'active_support/hash_with_indifferent_access'
 require 'active_support/core_ext/hash'
 require 'set'
 
-class Parameters < HashWithIndifferentAccess
+class StrongerParamters < HashWithIndifferentAccess
   include ActiveModel::Validations
 
   module WhistListing
@@ -14,12 +14,12 @@ class Parameters < HashWithIndifferentAccess
   end
 
   def self.validates_nested(*attr_names, &block)
-    validates_with Parameters::NestedValidator, _merge_attributes(attr_names), &block
+    validates_with StrongerParamters::NestedValidator, _merge_attributes(attr_names), &block
   end
   
   class NestedValidator < ActiveModel::EachValidator
     def initialize(options, &block)
-      options[:with] ||= Class.new(Parameters, &block)
+      options[:with] ||= Class.new(StrongerParamters, &block)
       super
     end
 
