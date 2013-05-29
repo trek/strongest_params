@@ -1,6 +1,4 @@
-source 'https://rubygems.org'
-
-gem 'activemodel', require: 'active_model'
+gemspec
 
 group :test do
   gem 'rspec'

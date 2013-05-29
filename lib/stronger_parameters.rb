@@ -1,9 +1,10 @@
 Bundler.require(:default)
+require 'active_model'
 require 'active_support/hash_with_indifferent_access'
 require 'active_support/core_ext/hash'
 require 'set'
 
-class StrongerParamters < HashWithIndifferentAccess
+class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
   include ActiveModel::Validations
 
   module WhistListing
@@ -14,12 +15,12 @@ class StrongerParamters < HashWithIndifferentAccess
   end
 
   def self.validates_nested(*attr_names, &block)
-    validates_with StrongerParamters::NestedValidator, _merge_attributes(attr_names), &block
+    validates_with StrongerParameters::NestedValidator, _merge_attributes(attr_names), &block
   end
   
   class NestedValidator < ActiveModel::EachValidator
     def initialize(options, &block)
-      options[:with] ||= Class.new(StrongerParamters, &block)
+      options[:with] ||= Class.new(StrongerParameters, &block)
       super
     end
 
