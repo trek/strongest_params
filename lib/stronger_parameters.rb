@@ -67,7 +67,12 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
   end
 
   def allowed_params
-    @allowed_params ||= Set.new
+    @allowed_params ||= Set.new([:controller, :action])
+  end
+
+  # Params cannot be set. Not sure what is
+  # calling this method
+  def []=(key,val)
   end
 
   def read_attribute_for_validation(key)
