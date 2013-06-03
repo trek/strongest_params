@@ -28,7 +28,7 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
       params = record[attribute] = options[:with].new(value)
 
       unless params.valid?
-        record.errors.add(attribute, :invalid, options.merge(:value => params))
+        record.errors.add(attribute, params.errors)
       end
     end
 
