@@ -7,6 +7,10 @@ require 'set'
 class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
   include ActiveModel::Validations
 
+  def self.name
+    "StrongerParamters"
+  end
+
   module WhistListing
     def validate(model)
       model.allowed_params.merge(attributes)
@@ -25,11 +29,8 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
     end
 
     def validate_nested(record, attribute, value)
-      params = record[attribute] = options[:with].new(value)
-
-      unless params.valid?
-        record.errors.add(attribute, params.errors)
-      end
+      errors = value.is_a?(Array) ? errors_from_array(value) : errors_from_hash(value)
+      record.errors.add(attribute, errors) unless errors.empty?
     end
 
     def validate_each(record, attribute, value)
@@ -41,6 +42,21 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
       else
         validate_nested(record, attribute, value)
       end
+    end
+    
+    private
+    def errors_from_array(array)
+      array.inject([]) do |errors, item|
+        nested = options[:with].new(item)
+        errors << nested.errors unless nested.valid?
+        errors
+      end
+    end
+
+    def errors_from_hash(hash)
+      hash = options[:with].new(hash)
+      hash.valid?
+      hash.errors
     end
   end
 

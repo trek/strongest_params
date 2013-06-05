@@ -7,19 +7,25 @@ end
 
 shared_examples "nested parameters" do
   it "errors if not allowed params are passed" do
-    c = subject.new(page: {notallowed: 'NO.'})
+    c = subject.new(page: {notallowed: 'NO.', age: 11})
     c.valid?
     c.errors.should_not be_empty
   end
 
   it "works with nested hashes" do
-    c = subject.new(page: {name: 'OK'})
+    c = subject.new(page: {name: 'OK', age: 5})
     c.valid?
     c.errors.should be_empty
   end
 
-  it "works with nested arrays" do
+  it "is not valid when nested objects are invalid" do
     c = subject.new(page: [ {name: 'OK'}, {name: 'OK'} ])
+    c.valid?
+    c.errors.should_not be_empty
+  end
+
+  it "is valid when nested objects are valid" do
+    c = subject.new(page: [ {name: 'OK', age: 5}, {name: 'OK', age: 10} ])
     c.valid?
     c.errors.should be_empty
   end
@@ -30,12 +36,9 @@ describe "nested parameters using block" do
 
   subject do
     Class.new(StrongerParameters) do
-      def self.name
-        "Anonymous"
-      end
-
       validates_nested :page do |page|
         page.validates :name, allowed: true
+        page.validates :age, presence: true
       end
 
     end
@@ -48,13 +51,10 @@ describe "nested parameters using with option" do
   subject do
     with_option = Class.new(StrongerParameters) do
       validates :name, allowed: true
+      validates :age, presence: true
     end
 
     Class.new(StrongerParameters) do
-      def self.name
-        "Anonymous"
-      end
-
       validates_nested :page, with: with_option
     end
   end
