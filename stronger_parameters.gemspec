@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name        = 'stronger_parameters'
-  s.version     = '0.2.0'
+  s.version     = '0.2.1'
   s.summary     = "Rails Parameter validation"
   s.description = "Rails Parameter validation"
   s.authors     = ["Trek Glowacki"]
