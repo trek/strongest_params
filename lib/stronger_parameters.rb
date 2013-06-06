@@ -29,6 +29,8 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
     end
 
     def validate_nested(record, attribute, value)
+      return if there_is_no_reason_to_validate(value)
+
       errors = value.is_a?(Array) ? errors_from_array(value) : errors_from_hash(value)
       record.errors.add(attribute, errors) unless errors.empty?
     end
@@ -45,6 +47,10 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
     end
     
     private
+    def there_is_no_reason_to_validate(value)
+      value.nil? && !options[:presence]  
+    end
+
     def errors_from_array(array)
       array.inject([]) do |errors, item|
         nested = options[:with].new(item)

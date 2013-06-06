@@ -45,6 +45,28 @@ describe "nested parameters using block" do
   end
 end
 
+describe "nested paramters that are not required" do
+  subject do
+    Class.new(StrongerParameters) do
+      validates_nested :page, presence: false do |page|
+        page.validates :name, presence: true
+      end
+    end
+  end
+
+  it "are not validated when no data is passed" do
+    c = subject.new()
+    c.valid?
+    c.errors.should be_empty
+  end
+
+  it "are validated if data is passed" do
+    c = subject.new(page: {})
+    c.valid?
+    c.errors.should_not be_empty
+  end
+end
+
 describe "nested parameters using with option" do
   it_behaves_like "nested parameters"
 
