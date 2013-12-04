@@ -11,7 +11,7 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
     "StrongerParamters"
   end
 
-  module WhistListing
+  module WhiteListing
     def validate(model)
       model.allowed_params.merge(attributes)
       super
@@ -67,19 +67,19 @@ class StrongerParameters < ActiveSupport::HashWithIndifferentAccess
   end
 
   class InclusionValidator < ActiveModel::Validations::InclusionValidator # :nodoc:
-    include WhistListing
+    include WhiteListing
   end
 
   class LengthValidator < ActiveModel::Validations::LengthValidator # :nodoc:
-    include WhistListing
+    include WhiteListing
   end
 
   class ExclusionValidator < ActiveModel::Validations::ExclusionValidator # :nodoc:
-    include WhistListing
+    include WhiteListing
   end 
 
   class PresenceValidator < ActiveModel::Validations::PresenceValidator # :nodoc:
-    include WhistListing
+    include WhiteListing
   end 
 
   class AllowedValidator < ActiveModel::EachValidator
