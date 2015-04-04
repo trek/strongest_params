@@ -95,6 +95,6 @@ end
 ## Adding validations
 see http://guides.rubyonrails.org/active_record_validations.html#performing-custom-validations
 
-## Availabel options for validations
+## Available options for validations
 see http://guides.rubyonrails.org/active_record_validations.html#conditional-validation
 and http://guides.rubyonrails.org/active_record_validations.html#common-validation-options
