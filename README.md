@@ -1,6 +1,6 @@
 ## Stronger Parameters
 
-Stronger Parameters is a library intended to repalce Rails [strong_paramters](https://github.com/rails/strong_parameters). `strong_paramters` has a nice chaninable API for validating input in code at the place the code lives:
+Stronger Parameters is a library intended to replace Rails [strong_parameters](https://github.com/rails/strong_parameters). `strong_parameters` has a nice chainable API for validating input in code at the place the code lives:
 
 ```ruby
 params.require(:person).permit(:name, :age)
@@ -15,29 +15,29 @@ Data shape validations for functions, procs, commands, etc (a la [Schema for Clo
 ```ruby
 class Rule
   class Schema < StrongerParameters
-    validates :name, :age, :color, presence: true
-    validates :coolness, allowed: true
-  end
+      validates :name, :age, :color, presence: true
+          validates :coolness, allowed: true
+            end
 
-  def call(parameters)
-    raise ArgumentError unless Schema.new(parameters).valid?
-    # continue exection
-  end
-end
-```
+              def call(parameters)
+                  raise ArgumentError unless Schema.new(parameters).valid?
+                      # continue exection
+                        end
+                        end
+                        ```
 
-Rails parameters validations at the controller layer:
+                        Rails parameters validations at the controller layer:
 
-```
-class FoosController < ApplicationController
-  class Validations < StrongerParameters
-    validates :name, :age, :color, presence: true, on: [:create, :update]
-    validates_nested :author do |a|
-      a.validates :name, length: {minimum: 12}, on: [:create]
-    end
-  end
-end
-```
+                        ```
+                        class FoosController < ApplicationController
+                          class Validations < StrongerParameters
+                              validates :name, :age, :color, presence: true, on: [:create, :update]
+                                  validates_nested :author do |a|
+                                        a.validates :name, length: {minimum: 12}, on: [:create]
+                                            end
+                                              end
+                                              end
+                                              ```
 
 ## Available validations
 ### Allowed
@@ -84,13 +84,13 @@ validates :name, length: {minimum: 12}
 ```
 
 ### Nested
-Valiadtions rules for a nested key. These rules will only apply if the key is present.
+Validations rules for a nested key. These rules will only apply if the key is present.
 
 ```ruby
 validates_nested :page, presence: false do |page|
   page.validates :name, presence: true
-end
-```
+  end
+  ```
 
 ## Adding validations
 see http://guides.rubyonrails.org/active_record_validations.html#performing-custom-validations
@@ -98,3 +98,4 @@ see http://guides.rubyonrails.org/active_record_validations.html#performing-cust
 ## Available options for validations
 see http://guides.rubyonrails.org/active_record_validations.html#conditional-validation
 and http://guides.rubyonrails.org/active_record_validations.html#common-validation-options
+
