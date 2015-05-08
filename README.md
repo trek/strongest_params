@@ -1,6 +1,6 @@
 ## Stronger Parameters
 
-Stronger Parameters is a library intended to repalce Rails [strong_paramters](https://github.com/rails/strong_parameters). `strong_paramters` has a nice chaninable API for validating input in code at the place the code lives:
+Stronger Parameters is a library intended to replace Rails [strong_parameters](https://github.com/rails/strong_parameters). `strong_parameters` has a nice chainable API for validating input in code at the place the code lives:
 
 ```ruby
 params.require(:person).permit(:name, :age)
@@ -84,7 +84,7 @@ validates :name, length: {minimum: 12}
 ```
 
 ### Nested
-Valiadtions rules for a nested key. These rules will only apply if the key is present.
+Validations rules for a nested key. These rules will only apply if the key is present.
 
 ```ruby
 validates_nested :page, presence: false do |page|
