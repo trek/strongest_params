@@ -28,7 +28,7 @@ end
 
 Rails parameters validations at the controller layer:
 
-```
+```ruby
 class FoosController < ApplicationController
   class Validations < StrongerParameters
     validates :name, :age, :color, presence: true, on: [:create, :update]
