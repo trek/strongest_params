@@ -1,6 +1,6 @@
 ## Stronger Parameters
 
-Stronger Parameters is a library intended to repalce Rails [strong_paramters](https://github.com/rails/strong_parameters). `strong_paramters` has a nice chaninable API for validating input in code at the place the code lives:
+Stronger Parameters is a library intended to replace Rails [strong_paramters](https://github.com/rails/strong_parameters). `strong_paramters` has a nice chaninable API for validating input in code at the place the code lives:
 
 ```ruby
 params.require(:person).permit(:name, :age)
