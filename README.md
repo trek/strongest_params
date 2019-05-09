@@ -21,7 +21,7 @@ class Rule
 
   def call(parameters)
     raise ArgumentError unless Schema.new(parameters).valid?
-    # continue exection
+    # continue execution
   end
 end
 ```
